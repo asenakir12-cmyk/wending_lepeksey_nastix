@@ -1,283 +1,69 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Свадьба Лепексея и Настикс | 26.09.2026</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --olive-green: #708238;
-            --light-olive: #a3ad85;
-            --soft-white: #ffffff;
-            --pale-grey: #f7f8f5;
-            --accent-gold: #c5a059;
-            --text-dark: #3a3f33;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--soft-white);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
-        .font-reading { font-family: 'Lora', serif; }
-
-        .font-helvetica-bold {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: -0.03em;
-            line-height: 0.9;
-        }
-
-        /* Hero Section */
-        .hero-bg {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background-color: #2a2d24;
-        }
-
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 30%; 
-            z-index: 1;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            /* Убран зеленый оттенок, заменен на нейтральный темный градиент для читаемости текста */
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            color: white;
-            width: 100%;
-        }
-
-        /* Section Styling */
-        .section-padding { padding: 100px 0; }
-        
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--olive-green);
-            border-radius: 50%;
-            position: relative;
-            z-index: 10;
-            box-shadow: 0 0 0 4px white;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: rgba(112, 130, 56, 0.2);
-            transform: translateX(-50%);
-        }
-
-        /* RSVP Section */
-        .rsvp-section {
-            background: var(--pale-grey);
-            position: relative;
-            padding: 120px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .form-card {
-            background: transparent;
-            padding: 0;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .input-noir {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(112, 130, 56, 0.2);
-            padding: 0.8rem 0;
-            width: 100%;
-            color: var(--text-dark);
-            font-family: 'Lora', serif;
-            transition: all 0.4s ease;
-            border-radius: 0;
-            margin-top: 0.2rem;
-        }
-
-        .input-noir:focus {
-            outline: none;
-            border-bottom-color: var(--olive-green);
-        }
-
-        .form-label {
-            display: block;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--light-olive);
-            margin-top: 2.5rem;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 1.2rem;
-            margin-top: 4rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            font-size: 0.8rem;
-            color: white;
-            background: var(--olive-green);
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: none;
-        }
-
-        .btn-submit:hover {
-            background: var(--text-dark);
-            letter-spacing: 0.4em;
-        }
-
-        select.input-noir {
-            appearance: none;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23708238%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E');
-            background-repeat: no-repeat;
-            background-position: right 0 center;
-            background-size: 1rem;
-        }
-
-        .fade-in { opacity: 0; transform: translateY(20px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-        .swatch {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-            border: 2px solid white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        /* Блок Навстречу счастью (Интерактивное фото) */
-        .rings-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 450px;
-            border-radius: 2px;
-        }
-
-        .rings-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: filter 0.8s ease, transform 1.2s ease;
-        }
-
-        .rings-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        .rings-text {
-            color: white;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 2.5rem;
-            letter-spacing: 0.1em;
-            transform: translateY(20px);
-            transition: transform 0.6s ease;
-        }
-
-        .rings-container:hover .rings-image {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
-
-        .rings-container:hover .rings-overlay {
-            opacity: 1;
-        }
-
-        .rings-container:hover .rings-text {
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .font-helvetica-bold { font-size: 3.2rem !important; }
-            .rsvp-section { padding: 80px 20px; }
-            .timeline-line { left: 20px; transform: none; }
-            .timeline-dot { position: absolute; left: 14px; }
-            .rings-container { height: 300px; margin-bottom: 2rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Свадьба Лепексея и Настикс | 26.09.2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --olive-green: #708238;
+    --light-olive: #a3ad85;
+    --soft-white: #ffffff;
+    --pale-grey: #f7f8f5;
+    --accent-gold: #c5a059;
+    --text-dark: #3a3f33;
+}
+body { font-family: 'Montserrat', sans-serif; background-color: var(--soft-white); color: var(--text-dark); margin:0; padding:0; overflow-x:hidden; scroll-behavior:smooth; }
+h1,h2,h3,.font-serif { font-family:'Playfair Display', serif; }
+.font-reading { font-family:'Lora', serif; }
+.hero-bg { position:relative; height:100vh; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; background-color:#2a2d24; }
+.hero-image { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; z-index:1; }
+.hero-overlay { position:absolute; inset:0; background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%); z-index:2; }
+.hero-content { position:relative; z-index:3; text-align:center; color:white; width:100%; }
+.section-padding { padding:100px 0; }
+.timeline-dot { width:12px; height:12px; background:var(--olive-green); border-radius:50%; position:relative; z-index:10; box-shadow:0 0 0 4px white; }
+.timeline-line { position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(112,130,56,0.2); transform:translateX(-50%); }
+.rsvp-section { background: var(--pale-grey); position:relative; padding:120px 0; display:flex; align-items:center; justify-content:center; }
+.form-card { background:transparent; padding:0; width:100%; max-width:600px; }
+.input-noir { background:transparent; border:none; border-bottom:1px solid rgba(112,130,56,0.2); padding:0.8rem 0; width:100%; color:var(--text-dark); font-family:'Lora', serif; transition:all 0.4s ease; border-radius:0; margin-top:0.2rem; }
+.input-noir:focus { outline:none; border-bottom-color:var(--olive-green); }
+.form-label { display:block; font-family:'Montserrat', sans-serif; text-transform:uppercase; letter-spacing:0.1em; font-size:0.7rem; font-weight:600; color:var(--light-olive); margin-top:2.5rem; }
+.btn-submit { width:100%; padding:1.2rem; margin-top:4rem; font-family:'Montserrat', sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.3em; font-size:0.8rem; color:white; background:var(--olive-green); cursor:pointer; transition:all 0.4s ease; border:none; }
+.btn-submit:hover { background:var(--text-dark); letter-spacing:0.4em; }
+select.input-noir { appearance:none; background-image:url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23708238%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E'); background-repeat:no-repeat; background-position:right 0 center; background-size:1rem; }
+.fade-in { opacity:0; transform:translateY(20px); transition:all 1.2s cubic-bezier(0.2,0.8,0.2,1); }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+.rings-container { position:relative; overflow:hidden; width:100%; height:450px; border-radius:2px; }
+.rings-image { width:100%; height:100%; object-fit:cover; filter:grayscale(100%); transition:filter 0.8s ease, transform 1.2s ease; }
+.rings-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.6s ease; }
+.rings-text { color:white; font-family:'Playfair Display', serif; font-style:italic; font-size:2.5rem; letter-spacing:0.1em; transform:translateY(20px); transition:transform 0.6s ease; }
+.rings-container:hover .rings-image { filter:grayscale(0%); transform:scale(1.05); }
+.rings-container:hover .rings-overlay { opacity:1; }
+.rings-container:hover .rings-text { transform:translateY(0); }
+@media (max-width:768px){.rsvp-section{padding:80px 20px}.rings-container{height:300px;margin-bottom:2rem;}}
+</style>
 </head>
 <body>
 
 <!-- Главный экран -->
 <section class="hero-bg">
-    <img src="photo.jpg" 
-         alt="[Фото Лепексея и Настикс]" 
-         class="hero-image">
-    
+    <img src="photo.jpg" alt="[Фото Лепексея и Настикс]" class="hero-image">
     <div class="hero-overlay"></div>
-    
     <div class="hero-content px-6">
         <p class="uppercase tracking-[0.6em] text-[10px] md:text-xs mb-10 fade-in">Приглашение на свадьбу</p>
-        
-        <div class="fade-in" style="transition-delay: 0.2s;">
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-helvetica-bold mb-4 drop-shadow-2xl text-white">
-                ЛЕПЕКСЕЙ
-            </h1>
+        <div class="fade-in" style="transition-delay:0.2s;">
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-helvetica-bold mb-4 drop-shadow-2xl text-white">ЛЕПЕКСЕЙ</h1>
             <div class="flex items-center justify-center gap-6 my-4 opacity-70">
                 <div class="h-[1px] w-12 bg-white"></div>
                 <span class="text-xl md:text-3xl font-light italic font-serif text-white">и</span>
                 <div class="h-[1px] w-12 bg-white"></div>
             </div>
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-helvetica-bold mb-10 drop-shadow-2xl text-white">
-                НАСТИКС
-            </h1>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-helvetica-bold mb-10 drop-shadow-2xl text-white">НАСТИКС</h1>
         </div>
-
-        <p class="text-lg md:text-2xl tracking-[0.5em] font-light uppercase fade-in" style="transition-delay: 0.4s; color: var(--light-olive);">
-            26 Сентября 2026
-        </p>
-        
-        <div class="mt-16 fade-in" style="transition-delay: 0.6s;">
+        <p class="text-lg md:text-2xl tracking-[0.5em] font-light uppercase fade-in" style="transition-delay:0.4s;color:var(--light-olive);">26 Сентября 2026</p>
+        <div class="mt-16 fade-in" style="transition-delay:0.6s;">
             <a href="#rsvp" class="group relative inline-flex items-center justify-center px-12 py-5 overflow-hidden font-medium tracking-tighter text-white border border-white/30 rounded-full hover:border-white transition-all duration-300">
                 <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56"></span>
                 <span class="relative text-[11px] uppercase tracking-[0.3em] group-hover:text-black">Подтвердить участие</span>
@@ -286,215 +72,22 @@
     </div>
 </section>
 
-<!-- Приветствие -->
-<section class="section-padding bg-white pb-0">
-    <div class="container mx-auto px-6 max-w-3xl text-center">
-        <h2 class="text-4xl md:text-5xl font-serif italic mb-10 fade-in" style="color: var(--olive-green);">Дорогие родные и друзья!</h2>
-        <div class="space-y-6 text-lg md:text-xl font-reading leading-relaxed text-stone-600 fade-in" style="transition-delay: 0.2s;">
-            <p>В жизни каждого человека есть моменты, которые хочется разделить с самыми близкими. Мы приглашаем вас стать свидетелями рождения нашей семьи.</p>
-            <p>Этот день будет наполнен радостью, теплом и любовью, и ваше присутствие сделает его по-настоящему особенным для нас.</p>
-        </div>
-        <div class="mt-12 h-20 flex justify-center fade-in" style="transition-delay: 0.4s;">
-            <div class="w-[1px] bg-stone-200"></div>
-        </div>
-    </div>
-</section>
-
 <!-- Навстречу счастью -->
 <section class="section-padding bg-white">
     <div class="container mx-auto px-6 max-w-6xl">
         <div class="grid md:grid-cols-2 gap-12 items-center">
-            <!-- Интерактивное фото -->
-            <div class="fade-in order-2 md:order-1" style="transition-delay: 0.3s;">
+            <div class="fade-in order-2 md:order-1" style="transition-delay:0.3s;">
                 <div class="rings-container shadow-xl">
                     <img src="rings.jpg" alt="[Фотография с кольцами]" class="rings-image">
-                    <div class="rings-overlay">
-                        <span class="rings-text">Навсегда</span>
-                    </div>
+                    <div class="rings-overlay"><span class="rings-text">Навсегда</span></div>
                 </div>
             </div>
-
-            <!-- Текст -->
             <div class="fade-in order-1 md:order-2">
                 <h2 class="text-3xl md:text-4xl font-serif italic mb-8 uppercase tracking-widest" style="color: var(--light-olive);">Навстречу счастью</h2>
                 <div class="space-y-6 text-base md:text-lg font-reading leading-relaxed text-stone-500 border-l border-stone-100 pl-8">
                     <p>Мы познакомились в ирландском баре Lions. Тот вечер неожиданно стал началом нашей истории — мы гуляли по ночной Москве, разговаривали и понимали, что встретили очень близкого человека.</p>
                     <p>Через месяц мы вместе пошли на концерт группы «Звери», и это было одно из самых ярких свиданий. Совсем скоро мы поняли, что хотим идти по жизни вместе.</p>
                     <p>А позже в нашей семье появился самый главный человек — наш малыш. Теперь мы будем очень счастливы разделить с вами день нашей свадьбы.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Программа -->
-<section class="section-padding bg-[#f7f8f5]">
-    <div class="container mx-auto px-6 max-w-4xl">
-        <h2 class="text-4xl md:text-5xl font-serif italic text-center mb-20 fade-in" style="color: var(--olive-green);">Программа</h2>
-        
-        <div class="relative">
-            <div class="timeline-line"></div>
-            
-            <div class="space-y-20">
-                <div class="text-center relative z-10 mb-10 fade-in">
-                    <span class="bg-[#f7f8f5] px-6 py-2 text-stone-400 font-light tracking-[0.3em] uppercase text-xs">26 Сентября</span>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="hidden md:block w-5/12 text-right pr-12">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">13:50</p>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="w-full md:w-5/12 pl-12 text-left">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">13:50</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">ЗАГС</h3>
-                        <p class="text-stone-500 font-reading">Церемония в Башне ОКО, Москва-Сити.</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="w-full md:w-5/12 pr-12 text-right order-2 md:order-1 pl-12 md:pl-0">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">15:10</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">Трансфер</h3>
-                        <p class="text-stone-500 font-reading">Отправление от парковки Москва-Сити до усадьбы.</p>
-                    </div>
-                    <div class="timeline-dot order-1 md:order-2"></div>
-                    <div class="hidden md:block w-5/12 text-left pl-12 order-3">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">15:10</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="hidden md:block w-5/12 text-right pr-12">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">17:00</p>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="w-full md:w-5/12 pl-12 text-left">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">17:00</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">Фуршет</h3>
-                        <p class="text-stone-500 font-reading">Сбор гостей по адресу: дер. Пучково, ул. Новая, 4.</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="w-full md:w-5/12 pr-12 text-right order-2 md:order-1 pl-12 md:pl-0">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">17:30</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">Регистрация</h3>
-                        <p class="text-stone-500 font-reading">Торжественная выездная регистрация в усадьбе.</p>
-                    </div>
-                    <div class="timeline-dot order-1 md:order-2"></div>
-                    <div class="hidden md:block w-5/12 text-left pl-12 order-3">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">17:30</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="hidden md:block w-5/12 text-right pr-12">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">18:30</p>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="w-full md:w-5/12 pl-12 text-left">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">18:30</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">Банкет</h3>
-                        <p class="text-stone-500 font-reading">Праздничный ужин и развлекательная программа.</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="w-full md:w-5/12 pr-12 text-right order-2 md:order-1 pl-12 md:pl-0">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">23:00</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">Afterparty</h3>
-                        <p class="text-stone-500 font-reading">Клубная вечеринка с ночевкой на территории усадьбы.</p>
-                    </div>
-                    <div class="timeline-dot order-1 md:order-2"></div>
-                    <div class="hidden md:block w-5/12 text-left pl-12 order-3">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">23:00</p>
-                    </div>
-                </div>
-
-                <div class="text-center relative z-10 py-10 fade-in">
-                    <span class="bg-[#f7f8f5] px-6 py-2 text-stone-400 font-light tracking-[0.3em] uppercase text-xs">27 Сентября</span>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="hidden md:block w-5/12 text-right pr-12">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">Весь день</p>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="w-full md:w-5/12 pl-12 text-left">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">Весь день</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">Релакс</h3>
-                        <p class="text-stone-500 font-reading">Баня, бассейн и отдых в свободном стиле.</p>
-                    </div>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="w-full md:w-5/12 pr-12 text-right order-2 md:order-1 pl-12 md:pl-0">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">20:00</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">Трансфер 1</h3>
-                        <p class="text-stone-500 font-reading">Трансфер обратно для тех, кому в понедельник на работу.</p>
-                    </div>
-                    <div class="timeline-dot order-1 md:order-2"></div>
-                    <div class="hidden md:block w-5/12 text-left pl-12 order-3">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">20:00</p>
-                    </div>
-                </div>
-
-                <div class="text-center relative z-10 py-10 fade-in">
-                    <span class="bg-[#f7f8f5] px-6 py-2 text-stone-400 font-light tracking-[0.3em] uppercase text-xs">28 Сентября</span>
-                </div>
-
-                <div class="relative flex items-center justify-center md:justify-between fade-in">
-                    <div class="hidden md:block w-5/12 text-right pr-12">
-                        <p class="text-stone-400 font-light tracking-widest uppercase text-sm">13:00</p>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="w-full md:w-5/12 pl-12 text-left">
-                        <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">13:00</p>
-                        <h3 class="text-xl font-semibold mb-2 uppercase tracking-wider">Финал</h3>
-                        <p class="text-stone-500 font-reading">Завершение мероприятия и общий трансфер обратно.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Дресс-код -->
-<section class="section-padding bg-white">
-    <div class="container mx-auto px-6 text-center max-w-4xl">
-        <h2 class="text-4xl md:text-5xl font-serif italic mb-10 fade-in" style="color: var(--olive-green);">Дресс-код</h2>
-        <p class="text-lg md:text-xl font-reading text-stone-600 mb-12 fade-in">Нам будет приятно видеть вас в нарядах следующих оттенков:</p>
-        <div class="grid grid-cols-3 md:grid-cols-5 gap-6 mb-16 fade-in">
-            <div><div class="swatch" style="background-color: #708238;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Olive</span></div>
-            <div><div class="swatch" style="background-color: #a3ad85;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Sage</span></div>
-            <div><div class="swatch" style="background-color: #c5a059;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Gold</span></div>
-            <div><div class="swatch" style="background-color: #e0e4d2;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Light Mist</span></div>
-            <div><div class="swatch" style="background-color: #3a3f33;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Dark Olive</span></div>
-        </div>
-        <div class="bg-[#f7f8f5] p-8 md:p-12 inline-block rounded-sm fade-in border border-stone-100">
-            <p class="text-sm uppercase tracking-[0.2em] font-bold mb-4" style="color: var(--olive-green);">Black Tie Optional</p>
-            <p class="text-stone-500 italic font-reading">Для мужчин: костюм или смокинг.<br>Для дам: вечернее или коктейльное платье в пол.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Проживание и Детали -->
-<section class="section-padding bg-white border-t border-stone-100">
-    <div class="container mx-auto px-6 max-w-5xl">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="fade-in">
-                <h2 class="text-4xl font-serif italic mb-6" style="color: var(--olive-green);">О проживании</h2>
-                <div class="space-y-4 text-stone-600 font-reading leading-relaxed">
-                    <p>Для вашего удобства мы предусмотрели размещение в отеле на территории усадьбы.</p>
-                    <p>Если вы планируете остаться с нами до понедельника, пожалуйста, отметьте это в анкете ниже, чтобы мы могли забронировать для вас номер.</p>
-                </div>
-            </div>
-            <div class="fade-in" style="transition-delay: 0.2s;">
-                <h2 class="text-4xl font-serif italic mb-6" style="color: var(--olive-green);">Цветы и подарки</h2>
-                <div class="space-y-4 text-stone-600 font-reading leading-relaxed">
-                    <p>Пожалуйста, не обременяйте себя поиском сложных букетов — мы будем рады одной розе или вашим улыбкам.</p>
-                    <p>Ваши пожелания в конвертах помогут нам осуществить мечту о свадебном путешествии.</p>
                 </div>
             </div>
         </div>
@@ -509,16 +102,10 @@
                 <h2 class="text-4xl md:text-5xl font-serif italic mb-4" style="color: var(--olive-green);">Анкета гостя</h2>
                 <p class="text-stone-400 font-reading italic text-lg">Пожалуйста, подтвердите ваше участие до 1 сентября</p>
             </div>
-            
             <div class="form-card fade-in">
                 <form id="weddingForm" class="space-y-2">
-                    <div>
-                        <label class="form-label">Ваше имя и фамилия</label>
-                        <input type="text" name="name" required class="input-noir" placeholder="Например, Иван Иванов">
-                    </div>
-
-                    <div>
-                        <label class="form-label">Сможете ли Вы прийти?</label>
+                    <div><label class="form-label">Ваше имя и фамилия</label><input type="text" name="name" required class="input-noir" placeholder="Например, Иван Иванов"></div>
+                    <div><label class="form-label">Сможете ли Вы прийти?</label>
                         <select name="attending" required class="input-noir">
                             <option value="" disabled selected>Выберите из списка</option>
                             <option value="Да">Да, с удовольствием</option>
@@ -526,9 +113,7 @@
                             <option value="Пока не могу сказать">Пока не могу сказать</option>
                         </select>
                     </div>
-
-                    <div>
-                        <label class="form-label">Ваши предпочтения в напитках</label>
+                    <div><label class="form-label">Ваши предпочтения в напитках</label>
                         <select name="drink" required class="input-noir">
                             <option value="" disabled selected>Выберите вариант</option>
                             <option value="Вино белое">Вино белое</option>
@@ -542,9 +127,7 @@
                             <option value="Только безалкогольные напитки">Только безалкогольные напитки</option>
                         </select>
                     </div>
-
-                    <div>
-                        <label class="form-label">Планы на 27-28 сентября</label>
+                    <div><label class="form-label">Планы на 27-28 сентября</label>
                         <select name="second_day" required class="input-noir">
                             <option value="" disabled selected>Ваше решение</option>
                             <option value="Смогу остаться до понедельника">Останусь до понедельника (28.09)</option>
@@ -552,9 +135,7 @@
                             <option value="Уеду вечером 26 сентября после банкета">Уеду сразу после банкета</option>
                         </select>
                     </div>
-
-                    <div>
-                        <label class="form-label">Трансфер обратно</label>
+                    <div><label class="form-label">Трансфер обратно</label>
                         <select name="transfer" required class="input-noir">
                             <option value="" disabled selected>Выберите время</option>
                             <option value="Общий трансфер 27 сентября в 20.00 (воскресенье)">Воскресенье, 20:00</option>
@@ -562,15 +143,11 @@
                             <option value="Свой транспорт">Личный транспорт</option>
                         </select>
                     </div>
-
-                    <div>
-                        <label class="form-label">Особые пожелания (аллергии)</label>
+                    <div><label class="form-label">Особые пожелания (аллергии)</label>
                         <input type="text" name="allergies" class="input-noir" placeholder="Если есть, укажите здесь">
                     </div>
-
                     <button type="submit" class="btn-submit">Отправить подтверждение</button>
                 </form>
-
                 <div id="successMessage" class="hidden text-center py-20">
                     <p class="font-serif italic text-4xl mb-4" style="color: var(--olive-green);">Благодарим!</p>
                     <p class="text-stone-500 font-reading text-lg leading-relaxed">Ваш ответ очень важен для нас. До встречи на празднике!</p>
@@ -582,23 +159,38 @@
 </section>
 
 <footer class="py-20 text-center bg-white border-t border-stone-100">
-    <p class="font-helvetica-bold text-3xl tracking-tighter uppercase" style="color: var(--text-dark);">Лепексей & Настикс</p>
-    <p class="text-[8px] tracking-[0.5em] text-stone-400 uppercase mt-4">26 • 09 • 2026</p>
+<p class="font-helvetica-bold text-3xl tracking-tighter uppercase" style="color: var(--text-dark);">Лепексей & Настикс</p>
+<p class="text-[8px] tracking-[0.5em] text-stone-400 uppercase mt-4">26 • 09 • 2026</p>
 </footer>
 
+<!-- Скрипт -->
 <script>
 const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-    });
+    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add("visible"); });
 }, { threshold: 0.1 });
 document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-document.getElementById("weddingForm").addEventListener("submit", e => {
+const scriptURL = "https://script.google.com/macros/s/AKfycbzY0taZ3Fq21_puY6cCpi38zsJX90csysK80oV12CRKpp6TT8gZ3VOg4NJ_IYfkXe4/exec";
+const form = document.getElementById("weddingForm");
+
+form.addEventListener("submit", e => {
     e.preventDefault();
-    document.getElementById("weddingForm").classList.add("hidden");
-    document.getElementById("successMessage").classList.remove("hidden");
-    document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth' });
+    const data = {
+        name: form.name.value,
+        attending: form.attending.value,
+        drink: form.drink.value,
+        second_day: form.second_day.value,
+        transfer: form.transfer.value,
+        allergies: form.allergies.value
+    };
+    fetch(scriptURL, { method:"POST", body:JSON.stringify(data) })
+    .then(res => res.json())
+    .then(resp => {
+        form.classList.add("hidden");
+        document.getElementById("successMessage").classList.remove("hidden");
+        document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});
+    })
+    .catch(err => { alert("Ошибка отправки формы. Попробуйте позже."); console.error(err); });
 });
 </script>
 
