@@ -163,9 +163,15 @@
             border: none;
         }
 
-        .btn-submit:hover {
+        .btn-submit:hover:not(:disabled) {
             background: var(--text-dark);
             letter-spacing: 0.4em;
+        }
+
+        .btn-submit:disabled {
+            background: var(--light-olive);
+            cursor: not-allowed;
+            opacity: 0.7;
         }
 
         select.input-noir {
@@ -529,12 +535,12 @@
                         <input type="text" name="allergies" class="input-noir" placeholder="Если есть, укажите здесь">
                     </div>
 
-                    <button type="submit" class="btn-submit">Отправить подтверждение</button>
+                    <button type="submit" id="submitBtn" class="btn-submit">Отправить подтверждение</button>
                 </form>
 
                 <div id="successMessage" class="hidden text-center py-20">
                     <p class="font-serif italic text-4xl mb-4" style="color: var(--olive-green);">Благодарим!</p>
-                    <p class="text-stone-500 font-reading text-lg leading-relaxed">Ваш ответ очень важен для нас. До встречи на празднике!</p>
+                    <p id="resultText" class="text-stone-500 font-reading text-lg leading-relaxed">Ваш ответ очень важен для нас. До встречи на празднике!</p>
                     <div class="mt-10 inline-block w-12 h-[1px] bg-stone-200"></div>
                 </div>
             </div>
@@ -548,6 +554,7 @@
 </footer>
 
 <script>
+// Анимация появления при скролле
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -555,11 +562,37 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-document.getElementById("weddingForm").addEventListener("submit", e => {
+// Обработка формы
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwRz9vsJFmAqsjH1GDDDPAIz7d48aCamr_MZmtXA7rFLBsCV6x_vmsIXcTaF6-avfGv/exec';
+const form = document.getElementById("weddingForm");
+const submitBtn = document.getElementById("submitBtn");
+const successMessage = document.getElementById("successMessage");
+const resultText = document.getElementById("resultText");
+
+form.addEventListener("submit", e => {
     e.preventDefault();
-    document.getElementById("weddingForm").classList.add("hidden");
-    document.getElementById("successMessage").classList.remove("hidden");
-    document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth' });
+    
+    // Индикация загрузки
+    submitBtn.disabled = true;
+    submitBtn.innerText = "ОТПРАВЛЯЕМ...";
+    
+    const formData = new FormData(form);
+
+    fetch(scriptURL, { 
+        method: 'POST', 
+        body: formData
+    })
+    .then(response => {
+        form.classList.add("hidden");
+        successMessage.classList.remove("hidden");
+        document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth' });
+    })
+    .catch(error => {
+        console.error('Error!', error.message);
+        submitBtn.disabled = false;
+        submitBtn.innerText = "ПОПРОБОВАТЬ СНОВА";
+        alert("Произошла ошибка при отправке. Пожалуйста, проверьте интернет-соединение или попробуйте позже.");
+    });
 });
 </script>
 
