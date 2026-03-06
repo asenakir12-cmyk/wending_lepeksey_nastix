@@ -27,8 +27,7 @@ h1,h2,h3,.font-serif { font-family:'Playfair Display', serif; }
 
 /* Hero Section with Parallax */
 .hero-bg {
-    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
-                url('photo.jpg');
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('photo.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -205,56 +204,89 @@ h1,h2,h3,.font-serif { font-family:'Playfair Display', serif; }
 </footer>
 
 <script>
-// Countdown
+// ================= COUNTDOWN =================
 const weddingDate = new Date("September 26, 2026 16:00:00").getTime();
-function updateCountdown() {
+
+function updateCountdown(){
   const now = new Date().getTime();
   const diff = weddingDate - now;
-  if(diff<0){ document.getElementById("countdown").innerHTML="<p class='text-xl italic font-serif'>Этот день настал!</p>"; return; }
+
+  if(diff < 0){
+    document.getElementById("countdown").innerHTML =
+      "<p class='text-xl italic font-serif'>Этот день настал!</p>";
+    return;
+  }
+
   const d = Math.floor(diff/(1000*60*60*24));
   const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
   const m = Math.floor((diff%(1000*60*60))/(1000*60));
   const s = Math.floor((diff%(1000*60))/1000);
-  document.getElementById("days").innerText=d<10?'0'+d:d;
-  document.getElementById("hours").innerText=h<10?'0'+h:h;
-  document.getElementById("minutes").innerText=m<10?'0'+m:m;
-  document.getElementById("seconds").innerText=s<10?'0'+s:s;
+
+  document.getElementById("days").innerText = d < 10 ? "0"+d : d;
+  document.getElementById("hours").innerText = h < 10 ? "0"+h : h;
+  document.getElementById("minutes").innerText = m < 10 ? "0"+m : m;
+  document.getElementById("seconds").innerText = s < 10 ? "0"+s : s;
 }
-setInterval(updateCountdown,1000); updateCountdown();
 
-// Scroll animations
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+// ================= SCROLL ANIMATION =================
 const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); });
-},{ threshold:0.1 });
-document.querySelectorAll('.animate-on-scroll').forEach(el=>observer.observe(el));
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+},{threshold:0.1});
 
-// Form submission
-const scriptURL = 'https://script.google.com/macros/s/AKfycby227xSAD1recO18wJU7XqXN0CdLw2ws6xQSlkpcD5Pyg0dVegBp6dzeFQJmvUN37C2/exec';
-const form = document.getElementById('weddingForm');
-form.addEventListener('submit', e=>{
-  e.preventDefault();
-  fetch(scriptURL, { method:'POST', body:new FormData(form) })
-    .then(response=>response.json())
-    .then(response=>{
-      if(response.success){
-        form.style.opacity='0';
-        setTimeout(()=>{
-          form.classList.add('hidden');
-          document.getElementById('successMessage').classList.remove('hidden');
-          document.getElementById('successMessage').classList.add('fade-up-in');
-        },500);
-      } else {
-        alert('Ошибка отправки: '+(response.error||'Попробуйте позже'));
-      }
-    })
-    .catch(error=>alert('Ошибка отправки: '+error));
+document.querySelectorAll(".animate-on-scroll").forEach(el=>{
+  observer.observe(el);
 });
 
-// Hero parallax
-window.addEventListener('scroll', ()=>{
+// ================= RSVP FORM =================
+const scriptURL = "https://script.google.com/macros/s/AKfycbzY0taZ3Fq21_puY6cCpi38zsJX90csysK80oV12CRKpp6TT8gZ3VOg4NJ_IYfkXe4/exec";
+const form = document.getElementById("weddingForm");
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const data = {
+    name: form.name.value,
+    attendance: form.attending.value,
+    drink: form.drink.value,
+    day2: form.second_day.value,
+    transfer: form.transfer.value,
+    allergy: form.allergies.value
+  };
+
+  fetch(scriptURL,{
+    method:"POST",
+    body:JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(response => {
+      form.style.opacity = "0";
+      setTimeout(()=>{
+        form.classList.add("hidden");
+        document.getElementById("successMessage").classList.remove("hidden");
+        document.getElementById("successMessage").classList.add("fade-up-in");
+      },500);
+  })
+  .catch(err=>{
+      alert("Ошибка отправки формы. Попробуйте позже.");
+      console.error(err);
+  });
+});
+
+// ================= HERO PARALLAX =================
+window.addEventListener("scroll",()=>{
   const scrolled = window.pageYOffset;
-  const hero = document.querySelector('.hero-bg');
-  if(window.innerWidth>768){ hero.style.backgroundPositionY = -(scrolled*0.3)+'px'; }
+  const hero = document.querySelector(".hero-bg");
+
+  if(window.innerWidth > 768){
+    hero.style.backgroundPositionY = -(scrolled * 0.3) + "px";
+  }
 });
 </script>
 
