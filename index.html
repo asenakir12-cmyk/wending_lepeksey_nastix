@@ -63,7 +63,8 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(112, 130, 56, 0.2) 0%, rgba(58, 63, 51, 0.5) 100%);
+            /* Убран зеленый оттенок, заменен на нейтральный темный градиент для читаемости текста */
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%);
             z-index: 2;
         }
 
@@ -185,11 +186,63 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
+        /* Блок Навстречу счастью (Интерактивное фото) */
+        .rings-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 450px;
+            border-radius: 2px;
+        }
+
+        .rings-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.8s ease, transform 1.2s ease;
+        }
+
+        .rings-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .rings-text {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.5rem;
+            letter-spacing: 0.1em;
+            transform: translateY(20px);
+            transition: transform 0.6s ease;
+        }
+
+        .rings-container:hover .rings-image {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .rings-container:hover .rings-overlay {
+            opacity: 1;
+        }
+
+        .rings-container:hover .rings-text {
+            transform: translateY(0);
+        }
+
         @media (max-width: 768px) {
             .font-helvetica-bold { font-size: 3.2rem !important; }
             .rsvp-section { padding: 80px 20px; }
             .timeline-line { left: 20px; transform: none; }
             .timeline-dot { position: absolute; left: 14px; }
+            .rings-container { height: 300px; margin-bottom: 2rem; }
         }
     </style>
 </head>
@@ -197,7 +250,6 @@
 
 <!-- Главный экран -->
 <section class="hero-bg">
-    <!-- Изображение теперь загружается по прямому названию файла в корне GitHub -->
     <img src="photo.jpg" 
          alt="[Фото Лепексея и Настикс]" 
          class="hero-image">
@@ -235,7 +287,7 @@
 </section>
 
 <!-- Приветствие -->
-<section class="section-padding bg-white">
+<section class="section-padding bg-white pb-0">
     <div class="container mx-auto px-6 max-w-3xl text-center">
         <h2 class="text-4xl md:text-5xl font-serif italic mb-10 fade-in" style="color: var(--olive-green);">Дорогие родные и друзья!</h2>
         <div class="space-y-6 text-lg md:text-xl font-reading leading-relaxed text-stone-600 fade-in" style="transition-delay: 0.2s;">
@@ -244,6 +296,33 @@
         </div>
         <div class="mt-12 h-20 flex justify-center fade-in" style="transition-delay: 0.4s;">
             <div class="w-[1px] bg-stone-200"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Навстречу счастью -->
+<section class="section-padding bg-white">
+    <div class="container mx-auto px-6 max-w-6xl">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <!-- Интерактивное фото -->
+            <div class="fade-in order-2 md:order-1" style="transition-delay: 0.3s;">
+                <div class="rings-container shadow-xl">
+                    <img src="rings.jpg" alt="[Фотография с кольцами]" class="rings-image">
+                    <div class="rings-overlay">
+                        <span class="rings-text">Навсегда</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Текст -->
+            <div class="fade-in order-1 md:order-2">
+                <h2 class="text-3xl md:text-4xl font-serif italic mb-8 uppercase tracking-widest" style="color: var(--light-olive);">Навстречу счастью</h2>
+                <div class="space-y-6 text-base md:text-lg font-reading leading-relaxed text-stone-500 border-l border-stone-100 pl-8">
+                    <p>Мы познакомились в ирландском баре Lions. Тот вечер неожиданно стал началом нашей истории — мы гуляли по ночной Москве, разговаривали и понимали, что встретили очень близкого человека.</p>
+                    <p>Через месяц мы вместе пошли на концерт группы «Звери», и это было одно из самых ярких свиданий. Совсем скоро мы поняли, что хотим идти по жизни вместе.</p>
+                    <p>А позже в нашей семье появился самый главный человек — наш малыш. Теперь мы будем очень счастливы разделить с вами день нашей свадьбы.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -257,12 +336,10 @@
             <div class="timeline-line"></div>
             
             <div class="space-y-20">
-                <!-- 26 СЕНТЯБРЯ -->
                 <div class="text-center relative z-10 mb-10 fade-in">
                     <span class="bg-[#f7f8f5] px-6 py-2 text-stone-400 font-light tracking-[0.3em] uppercase text-xs">26 Сентября</span>
                 </div>
 
-                <!-- ЗАГС -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="hidden md:block w-5/12 text-right pr-12">
                         <p class="text-stone-400 font-light tracking-widest uppercase text-sm">13:50</p>
@@ -275,7 +352,6 @@
                     </div>
                 </div>
 
-                <!-- Трансфер -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="w-full md:w-5/12 pr-12 text-right order-2 md:order-1 pl-12 md:pl-0">
                         <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">15:10</p>
@@ -288,7 +364,6 @@
                     </div>
                 </div>
 
-                <!-- Фуршет -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="hidden md:block w-5/12 text-right pr-12">
                         <p class="text-stone-400 font-light tracking-widest uppercase text-sm">17:00</p>
@@ -301,7 +376,6 @@
                     </div>
                 </div>
 
-                <!-- Регистрация -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="w-full md:w-5/12 pr-12 text-right order-2 md:order-1 pl-12 md:pl-0">
                         <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">17:30</p>
@@ -314,7 +388,6 @@
                     </div>
                 </div>
 
-                <!-- Банкет -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="hidden md:block w-5/12 text-right pr-12">
                         <p class="text-stone-400 font-light tracking-widest uppercase text-sm">18:30</p>
@@ -327,7 +400,6 @@
                     </div>
                 </div>
 
-                <!-- Afterparty -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="w-full md:w-5/12 pr-12 text-right order-2 md:order-1 pl-12 md:pl-0">
                         <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">23:00</p>
@@ -340,12 +412,10 @@
                     </div>
                 </div>
 
-                <!-- 27 СЕНТЯБРЯ -->
                 <div class="text-center relative z-10 py-10 fade-in">
                     <span class="bg-[#f7f8f5] px-6 py-2 text-stone-400 font-light tracking-[0.3em] uppercase text-xs">27 Сентября</span>
                 </div>
 
-                <!-- Релакс -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="hidden md:block w-5/12 text-right pr-12">
                         <p class="text-stone-400 font-light tracking-widest uppercase text-sm">Весь день</p>
@@ -358,7 +428,6 @@
                     </div>
                 </div>
 
-                <!-- Трансфер 1 -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="w-full md:w-5/12 pr-12 text-right order-2 md:order-1 pl-12 md:pl-0">
                         <p class="md:hidden text-stone-400 font-light tracking-widest uppercase text-xs mb-2">20:00</p>
@@ -371,12 +440,10 @@
                     </div>
                 </div>
 
-                <!-- 28 СЕНТЯБРЯ -->
                 <div class="text-center relative z-10 py-10 fade-in">
                     <span class="bg-[#f7f8f5] px-6 py-2 text-stone-400 font-light tracking-[0.3em] uppercase text-xs">28 Сентября</span>
                 </div>
 
-                <!-- Финал -->
                 <div class="relative flex items-center justify-center md:justify-between fade-in">
                     <div class="hidden md:block w-5/12 text-right pr-12">
                         <p class="text-stone-400 font-light tracking-widest uppercase text-sm">13:00</p>
@@ -398,30 +465,13 @@
     <div class="container mx-auto px-6 text-center max-w-4xl">
         <h2 class="text-4xl md:text-5xl font-serif italic mb-10 fade-in" style="color: var(--olive-green);">Дресс-код</h2>
         <p class="text-lg md:text-xl font-reading text-stone-600 mb-12 fade-in">Нам будет приятно видеть вас в нарядах следующих оттенков:</p>
-        
         <div class="grid grid-cols-3 md:grid-cols-5 gap-6 mb-16 fade-in">
-            <div>
-                <div class="swatch" style="background-color: #708238;"></div>
-                <span class="text-[10px] uppercase tracking-widest text-stone-400">Olive</span>
-            </div>
-            <div>
-                <div class="swatch" style="background-color: #a3ad85;"></div>
-                <span class="text-[10px] uppercase tracking-widest text-stone-400">Sage</span>
-            </div>
-            <div>
-                <div class="swatch" style="background-color: #c5a059;"></div>
-                <span class="text-[10px] uppercase tracking-widest text-stone-400">Gold</span>
-            </div>
-            <div>
-                <div class="swatch" style="background-color: #e0e4d2;"></div>
-                <span class="text-[10px] uppercase tracking-widest text-stone-400">Light Mist</span>
-            </div>
-            <div>
-                <div class="swatch" style="background-color: #3a3f33;"></div>
-                <span class="text-[10px] uppercase tracking-widest text-stone-400">Dark Olive</span>
-            </div>
+            <div><div class="swatch" style="background-color: #708238;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Olive</span></div>
+            <div><div class="swatch" style="background-color: #a3ad85;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Sage</span></div>
+            <div><div class="swatch" style="background-color: #c5a059;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Gold</span></div>
+            <div><div class="swatch" style="background-color: #e0e4d2;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Light Mist</span></div>
+            <div><div class="swatch" style="background-color: #3a3f33;"></div><span class="text-[10px] uppercase tracking-widest text-stone-400">Dark Olive</span></div>
         </div>
-        
         <div class="bg-[#f7f8f5] p-8 md:p-12 inline-block rounded-sm fade-in border border-stone-100">
             <p class="text-sm uppercase tracking-[0.2em] font-bold mb-4" style="color: var(--olive-green);">Black Tie Optional</p>
             <p class="text-stone-500 italic font-reading">Для мужчин: костюм или смокинг.<br>Для дам: вечернее или коктейльное платье в пол.</p>
@@ -537,7 +587,6 @@
 </footer>
 
 <script>
-// Анимации появления
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -545,7 +594,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-// Обработка формы
 document.getElementById("weddingForm").addEventListener("submit", e => {
     e.preventDefault();
     document.getElementById("weddingForm").classList.add("hidden");
