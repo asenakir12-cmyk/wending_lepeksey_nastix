@@ -46,7 +46,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background-color: #f7f8f5; /* Светлый фон вместо темного */
+            background-color: #f7f8f5;
         }
 
         .hero-image {
@@ -58,16 +58,14 @@
             object-fit: cover;
             object-position: center 30%; 
             z-index: 1;
-            /* Фильтры полностью удалены */
             filter: none !important;
             -webkit-filter: none !important;
         }
 
-        /* Убрали градиентный оверлей, оставили только прозрачный слой для читаемости текста, если нужно */
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: transparent; /* Оверлей стал полностью прозрачным */
+            background: transparent;
             z-index: 2;
         }
 
@@ -77,7 +75,6 @@
             text-align: center;
             color: white;
             width: 100%;
-            /* Тень для текста, чтобы он читался на любом фото */
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
@@ -203,7 +200,6 @@
 
 <!-- Главный экран -->
 <section class="hero-bg">
-    <!-- Фильтры убраны через CSS style -->
     <img src="photo.jpg" 
          alt="[Фото Лепексея и Настикс]" 
          class="hero-image">
@@ -241,14 +237,26 @@
 </section>
 
 <!-- Приветствие -->
-<section class="section-padding bg-white">
+<section class="section-padding bg-white pb-0">
     <div class="container mx-auto px-6 max-w-3xl text-center">
         <h2 class="text-4xl md:text-5xl font-serif italic mb-10 fade-in" style="color: var(--olive-green);">Дорогие родные и друзья!</h2>
         <div class="space-y-6 text-lg md:text-xl font-reading leading-relaxed text-stone-600 fade-in" style="transition-delay: 0.2s;">
             <p>В жизни каждого человека есть моменты, которые хочется разделить с самыми близкими. Мы приглашаем вас стать свидетелями рождения нашей семьи.</p>
             <p>Этот день будет наполнен радостью, теплом и любовью, и ваше присутствие сделает его по-настоящему особенным для нас.</p>
         </div>
-        <div class="mt-12 h-20 flex justify-center fade-in" style="transition-delay: 0.4s;">
+    </div>
+</section>
+
+<!-- Наша История -->
+<section class="section-padding bg-white">
+    <div class="container mx-auto px-6 max-w-3xl text-center">
+        <h2 class="text-3xl md:text-4xl font-serif italic mb-8 fade-in" style="color: var(--olive-green);">Наша история</h2>
+        <div class="space-y-6 text-lg md:text-xl font-reading leading-relaxed text-stone-600 fade-in" style="transition-delay: 0.1s;">
+            <p>Мы познакомились однажды вечером в ирландском баре.</p>
+            <p>Разговор начался случайно, но закончился тем, что мы гуляли по ночной Москве до самого утра. Очень быстро мы поняли — это не просто встреча.</p>
+            <p>Уже на первом свидании был запланирован концерт, который стал одним из наших первых ярких воспоминаний. Спустя несколько месяцев наша жизнь изменилась ещё сильнее — у нас появился самый главный человек в нашей жизни. И теперь, когда нашему малышу уже почти год, мы хотим разделить этот важный день с вами.</p>
+        </div>
+        <div class="mt-12 h-20 flex justify-center fade-in" style="transition-delay: 0.3s;">
             <div class="w-[1px] bg-stone-200"></div>
         </div>
     </div>
@@ -540,7 +548,6 @@
 </footer>
 
 <script>
-// Анимации появления
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("visible");
@@ -548,7 +555,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-// Обработка формы
 document.getElementById("weddingForm").addEventListener("submit", e => {
     e.preventDefault();
     document.getElementById("weddingForm").classList.add("hidden");
